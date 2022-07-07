@@ -2,13 +2,13 @@ import pydicom as dicom
 import matplotlib.pyplot as plt
 import os
 import cv2
-import PIL # optional
+import PIL  # optional
 import pandas as pd
 import csv
 # make it True if you want in PNG format
-PNG = False
+PNG = True
 # Specify the .dcm folder path
-folder_path = "stage_1_test_images"
+folder_path = "D:\#Medicina\#Radiodiagnostica\[#] Archivio Referti\[=] PACS\OPT 2019-2022"
 # Specify the .jpg/.png folder path
 jpg_folder_path = "JPG_test"
 images_path = os.listdir(folder_path)
@@ -16,7 +16,7 @@ images_path = os.listdir(folder_path)
 # download this file from the given link # https://github.com/vivek8981/DICOM-to-JPG
 dicom_image_description = pd.read_csv("dicom_image_description.csv")
 
-with open('Patient_Detail.csv', 'w', newline ='') as csvfile:
+with open('Patient_Detail.csv', 'w', newline='') as csvfile:
     fieldnames = list(dicom_image_description["Description"])
     writer = csv.writer(csvfile, delimiter=',')
     writer.writerow(fieldnames)
@@ -25,9 +25,9 @@ with open('Patient_Detail.csv', 'w', newline ='') as csvfile:
         rows = []
         pixel_array_numpy = ds.pixel_array
         if PNG == False:
-            image = image.replace('.dcm', '.jpg')
+            image = image.replace('.DCM', '.jpg')
         else:
-            image = image.replace('.dcm', '.png')
+            image = image.replace('.DCM', '.png')
         cv2.imwrite(os.path.join(jpg_folder_path, image), pixel_array_numpy)
         if n % 50 == 0:
             print('{} image converted'.format(n))
