@@ -34,6 +34,9 @@ for n, image in enumerate(images_path):
 # Produci l'immagine usando i parametri del DICOM e quelli modificati
     pixel_array_numpy = ds.pixel_array
 
+#    pixel_array_numpy_2 = apply_voi_lut(
+#        pixel_array_numpy, ds, index=0, prefer_lut=True)
+
     img = pixel_array_numpy
 #    window_center = ds.WindowCenter
 #    window_width = ds.WindowWidth
@@ -42,11 +45,9 @@ for n, image in enumerate(images_path):
 #        img-window_center, alpha=(255.0 / window_width))
 
     scaled_img = cv2.convertScaleAbs(
-        img-np.min(img), alpha=(255.0 / min(np.max(img)-np.min(img), 10000)))
+        img-np.min(img), alpha=(255 / min(np.max(img)-np.min(img), 8000,)))
 
 
-#    pixel_array_numpy_2 = apply_voi_lut(
-#        pixel_array_numpy, ds, prefer_lut=False)
 #    pixel_array_numpy_3 = apply_windowing(
 #        pixel_array_numpy, ds)
 
@@ -63,7 +64,7 @@ for n, image in enumerate(images_path):
     id_studio = ds.AccessionNumber
     image_rename = id_studio + " " + image
 #    print(image)
-    print(image_rename)
+#    print(image_rename)
 
     cv2.imwrite(os.path.join(jpg_folder_path, image_rename), scaled_img)
 
