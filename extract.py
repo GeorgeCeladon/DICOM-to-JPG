@@ -1,16 +1,19 @@
 import pydicom as dicom
 import os
-import PIL # optional
+import PIL  # optional
 import pandas as pd
 import csv
+
 # list of attributes available in dicom image
 # download this file from the given github link
 dicom_image_description = pd.read_csv("dicom_image_description.csv")
+
 # Specify the .dcm folder path
-folder_path = "stage_1_test_images"
+folder_path = "D:\#Medicina\#Radiodiagnostica\[#] Archivio Referti\[=] PACS\OPT 2019-2022"
 images_path = os.listdir(folder_path)
+
 # Patient's information will be stored in working directory #'Patient_Detail.csv'
-with open('Patient_Detail.csv', 'w', newline ='') as csvfile:
+with open('Patient_Detail.csv', 'w', newline='') as csvfile:
     fieldnames = list(dicom_image_description["Description"])
     writer = csv.writer(csvfile, delimiter=',')
     writer.writerow(fieldnames)
@@ -18,6 +21,8 @@ with open('Patient_Detail.csv', 'w', newline ='') as csvfile:
         ds = dicom.dcmread(os.path.join(folder_path, image))
         rows = []
         for field in fieldnames:
+            print(ds.data_element)
+
             if ds.data_element(field) is None:
                 rows.append('')
             else:

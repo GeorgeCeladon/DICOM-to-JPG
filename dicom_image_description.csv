@@ -15,7 +15,6 @@ PatientBirthDate,DA
 PatientSex,CS
 PatientAge,AS
 BodyPartExamined,CS
-ViewPosition,CS
 StudyInstanceUID,UI
 SeriesInstanceUID,UI
 StudyID,SH
@@ -26,11 +25,8 @@ SamplesperPixel,US
 PhotometricInterpretation,CS
 Rows,US
 Columns,US
-PixelSpacing,DS
 BitsAllocated,US
 BitsStored,US
 HighBit,US
 PixelRepresentation,US
-LossyImageCompression,CS
-LossyImageCompressionMethod,CS
 PixelData,OB
